@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>App di Vercel</title>
+    <style>
+        /* CSS Anda di sini */
+        body { font-family: Arial; }
+    </style>
+</head>
+<body>
+    <div id="app">Loading...</div>
+    
+    <script>
+        // Fetch dari Apps Script
+        async function loadData() {
+            try {
+                const response = await fetch(
+                    'https://script.google.com/macros/s/AKfycbwD34ZYEn_rpIRauPofqCy9j0io0LyH0xgg7dN5fXskH8KzOUzOrNPLSFVXn12EFungnA/exec',
+                    { 
+                        mode: 'cors',
+                        headers: { 'Content-Type': 'application/json' }
+                    }
+                );
+                const data = await response.json();
+                document.getElementById('app').innerHTML = 
+                    `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            } catch (error) {
+                document.getElementById('app').innerHTML = 
+                    'Error loading data: ' + error.message;
+            }
+        }
+        
+        loadData();
+    </script>
+</body>
+</html>
